@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "rootDir": "./src",
     "strict": true, 
     "noImplicitAny": true, 
     "esModuleInterop": true,  
@@ -18,5 +19,5 @@
   } 
   },
   "include": [ "src/**/*" ],
-  "exclude": [ "src/public" ]
+  "exclude": [ "src/public", "node_modules" ]
 }

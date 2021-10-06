@@ -1,17 +1,15 @@
-import { Request, Response, Router } from 'express';
+import BaseRouter from './baseRouter';
 
-const router = Router();
+class IndexRouter extends BaseRouter {
+    constructor() {
+        super();
+        this.connectEndpoints();
+    }
 
-router
-    .get('/index', (req: Request, res: Response) => {
-        res.send('welcome');
-    })
-    .get('/*', (req, res) => {
-        const error = new Error('Not Found');
-    
-        res.status(404).json({
-            message: error.message,
-        });
-    });
+    private connectEndpoints(): void {
+        this.router.get('/index', this.indexController.index);
+        this.router.get('/*', this.indexController.unknown);
+    }
+}
 
-export default router;
+export default new IndexRouter().router;
