@@ -1,8 +1,4 @@
-import { Request, Response} from 'express'
-
-const getTimeStamp = (): string => {
-    return new Date().toISOString();
-};
+import { Request, Response} from 'express';
 
 class Logger {
     private static status_text = ', REQUEST';
@@ -11,6 +7,10 @@ class Logger {
 
     constructor() {}
 
+    getTimeStamp = (): string => {
+        return new Date().toISOString();
+    };
+
     log(req: Request, res: Response, logType: string, isRes: boolean = false): void {
         if (isRes) {
             Logger.status_text = `, STATUS - [${res.statusCode}]`;
@@ -18,11 +18,11 @@ class Logger {
 
         switch(logType) {
             case 'i': 
-                console.log(`[${getTimeStamp()}] [INFO], HOST-  [${req.hostname}], METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
+                console.log(`[${this.getTimeStamp()}] [INFO], HOST-  [${req.hostname}], METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
             case 'w':
-                console.warn(Logger.warn_color_code, `[${getTimeStamp()}] [WARNING], HOST-  [${req.hostname}] METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
+                console.warn(Logger.warn_color_code, `[${this.getTimeStamp()}] [WARNING], HOST-  [${req.hostname}] METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
             case 'e':
-                console.error(Logger.error_color_code, `[${getTimeStamp()}] [ERROR], HOST-  [${req.hostname}] METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
+                console.error(Logger.error_color_code, `[${this.getTimeStamp()}] [ERROR], HOST-  [${req.hostname}] METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]${Logger.status_text}`); break;
             default: break;
         }
     }
