@@ -12,4 +12,7 @@ class IndexRouter extends BaseRouter {
     }
 }
 
-export default new IndexRouter().router;
+const router = new IndexRouter().router;
+router.use('/', router);
+
+export default router;

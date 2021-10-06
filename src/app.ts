@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import logger from './config/logger';
 
 import indexRouter from './routes/index';
+const PREFIX = process.env.APP_PREFIX || '/api/v1/';
 class App {
     public app: express.Application;
     
@@ -35,7 +36,7 @@ class App {
     }
 
     private connectRoutes(): void {
-        this.app.use('/', indexRouter);
+        this.app.use(PREFIX, indexRouter);
     }
 }
 
