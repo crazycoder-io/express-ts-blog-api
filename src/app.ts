@@ -1,14 +1,16 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import logger from './config/logger';
+import Logger from '@config/logger';
 
 import indexRouter from './routes/index';
 const PREFIX = process.env.APP_PREFIX || '/api/v1/';
 class App {
     public app: express.Application;
+    logger;
     
     constructor() {
         this.app = express();
+        this.logger = new Logger();
         this.config();
         this.connectRoutes();
     }
@@ -19,15 +21,15 @@ class App {
         this.app.use(cookieParser());
 
         this.app.use((req, res, next) => {
-            logger(req, res, 'i');
+            this.logger.log({req, res, logType: 'i'});
         
             res.on('finish', () => {
                 if (res.statusCode === 404) {
-                    logger(req, res, 'w', true);
+                    this.logger.log({req, res, logType: 'w', isRes: true});
                 } else if (res.statusCode >= 500) {
-                    logger(req, res, 'e', true);
+                    this.logger.log({req, res, logType: 'e', isRes: true});
                 } else {
-                    logger(req, res, 'i', true);
+                    this.logger.log({req, res, logType: 'i', isRes: true});
                 }
             });
         
@@ -40,4 +42,4 @@ class App {
     }
 }
 
-module.exports = new App().app;
+export default App;
