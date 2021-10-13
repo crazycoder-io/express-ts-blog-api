@@ -1,6 +1,6 @@
 "use strict";
 
-const mongoose = require("mongoose"); // Mongoose module
+import mongoose from "mongoose"; // Mongoose module
 import Logger from "@config/logger";
 // eslint-disable-next-line import/no-extraneous-dependencies
 // const { MongoMemoryServer } = require("mongodb-memory-server");
