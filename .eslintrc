@@ -4,7 +4,8 @@
         "node": true
     },
     "extends": [
-        "eslint-config-prettier",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
         "prettier"
     ],
     "parser": "@typescript-eslint/parser",
@@ -14,8 +15,6 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "@typescript-eslint/eslint-plugin",
-        "eslint-plugin-prettier",
         "prettier"
     ],
     "rules": {

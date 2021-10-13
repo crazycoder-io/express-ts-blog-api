@@ -1,4 +1,4 @@
-import BaseRouter from './baseRouter';
+import BaseRouter from "./baseRouter";
 
 class IndexRouter extends BaseRouter {
     constructor() {
@@ -7,12 +7,12 @@ class IndexRouter extends BaseRouter {
     }
 
     private connectEndpoints(): void {
-        this.router.get('/index', this.indexController.index);
-        this.router.get('/*', this.indexController.unknown);
+        this.router.get("/index", this.indexController.index);
+        this.router.get("/*", this.indexController.unknown);
     }
 }
 
 const router = new IndexRouter().router;
-router.use('/', router);
+router.use("/", router);
 
 export default router;

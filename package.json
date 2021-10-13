@@ -6,16 +6,22 @@
     "start": "node index.ts",
     "dev": "nodemon --exec ts-node index.ts",
     "build": "npm-run-all clean lint tsc copy-assets",
-    "lint": "eslint .",
-    "prettier:base": "prettier --parser typescript --single-quote",
-    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
-    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "prettier:check": "prettier --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "mongoose": "^6.0.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint && yarn run prettier:check",
+      "pre-push": "npm run lint"
+    }
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
@@ -28,6 +34,7 @@
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1",
     "ts-node": "^10.0.0",
